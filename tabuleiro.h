@@ -1,17 +1,17 @@
 #ifndef TABULEIRO_H
 #define TABULEIRO_H
 
-struct Tabuleiro
+typedef struct 
 {
     int M[3][3];
-};
+} Tabuleiro;
 
-void inicializaTabuleiro(struct Tabuleiro *t);
+void inicializaTabuleiro(Tabuleiro *t);
 
-void desenha(struct Tabuleiro *t);
+void desenha(Tabuleiro *t);
 
-void marcaJogada(struct Tabuleiro *t, int x, int y, int tipo);
+void marcaJogada(Tabuleiro *t, int x, int y, int tipo);
 
-int temVencedor(struct Tabuleiro *t);
+int temVencedor(Tabuleiro *t);
 
 #endif

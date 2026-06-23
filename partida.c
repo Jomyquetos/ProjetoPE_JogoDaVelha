@@ -1,14 +1,23 @@
 #include <stdio.h>
 #include "partida.h"
 
-void configuraJogadores(struct Partida *p)
+void configuraJogadores(Partida *p)
 {
-    p->jogador1.tipo = 1; // O
+    char aux;
+    printf("Jogador 1, escolha seu símbolo (O ou X): ");
+    scanf(" %c", &aux);
 
-    p->jogador2.tipo = 4; // X
+    if(aux == 'O' || aux == 'o'){
+        p->jogador1.tipo = 1; // O
+        p->jogador2.tipo = 4; // X
+    }
+    else{
+        p->jogador1.tipo = 4; // X
+        p->jogador2.tipo = 1; // O
+    }
 }
 
-void inicia(struct Partida *p)
+void inicia(Partida *p)
 {
     int vencedor = 0;
     int jogadas = 0;

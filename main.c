@@ -2,7 +2,7 @@
 
 int main()
 {
-    struct Partida jogo;
+    Partida jogo;
 
     configuraJogadores(&jogo);
 

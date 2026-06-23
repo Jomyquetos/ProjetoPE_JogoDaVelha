@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "jogadorTeclado.h"
 
-void joga(struct JogadorTeclado *j, struct Tabuleiro *t)
+void joga(JogadorTeclado *j, Tabuleiro *t)
 {
     int linha, coluna;
 

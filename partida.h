@@ -4,17 +4,17 @@
 #include "tabuleiro.h"
 #include "jogadorTeclado.h"
 
-struct Partida
+typedef struct 
 {
-    struct Tabuleiro tabuleiro;
+    Tabuleiro tabuleiro;
 
-    struct JogadorTeclado jogador1;
+    JogadorTeclado jogador1;
 
-    struct JogadorTeclado jogador2;
-};
+    JogadorTeclado jogador2;
+} Partida;
 
-void configuraJogadores(struct Partida *p);
+void configuraJogadores(Partida *p);
 
-void inicia(struct Partida *p);
+void inicia(Partida *p);
 
 #endif

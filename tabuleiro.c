@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "tabuleiro.h"
 
-void inicializaTabuleiro(struct Tabuleiro *t)
+void inicializaTabuleiro(Tabuleiro *t)
 {
     int i, j;
 
@@ -14,7 +14,7 @@ void inicializaTabuleiro(struct Tabuleiro *t)
     }
 }
 
-void desenha(struct Tabuleiro *t)
+void desenha(Tabuleiro *t)
 {
     printf("\033[2J\033[H");
 
@@ -51,12 +51,12 @@ void desenha(struct Tabuleiro *t)
     printf("\n");
 }
 
-void marcaJogada(struct Tabuleiro *t, int x, int y, int tipo)
+void marcaJogada(Tabuleiro *t, int x, int y, int tipo)
 {
     t->M[x][y] = tipo;
 }
 
-int temVencedor(struct Tabuleiro *t)
+int temVencedor(Tabuleiro *t)
 {
     int i, soma;
 

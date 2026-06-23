@@ -3,11 +3,11 @@
 
 #include "tabuleiro.h"
 
-struct JogadorTeclado
+typedef struct 
 {
     int tipo;
-};
+}JogadorTeclado;
 
-void joga(struct JogadorTeclado *j, struct Tabuleiro *t);
+void joga(JogadorTeclado *j, Tabuleiro *t);
 
 #endif
