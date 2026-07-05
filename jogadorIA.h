@@ -3,10 +3,12 @@
 
 #include "tabuleiro.h"
 
+typedef struct Partida Partida;
+
 typedef struct
 {   
     int tipo;
-}JogadorIA;
+} JogadorIA;
 
 void jogaIA(Partida *p, Tabuleiro *t);
 

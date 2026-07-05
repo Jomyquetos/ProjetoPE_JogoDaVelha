@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "partida.h"
 
+
 void configuraJogadores(Partida *p)
 {
     char aux;
@@ -28,7 +29,7 @@ void inicia(Partida *p)
     {
         desenha(&p->tabuleiro);
 
-        jogaIA(&p->jogadorIA, &p->tabuleiro);
+        jogaIA(p, &p->tabuleiro);
 
         jogadas++;
 

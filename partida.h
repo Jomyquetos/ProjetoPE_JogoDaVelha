@@ -5,7 +5,8 @@
 #include "jogadorTeclado.h"
 #include "jogadorIA.h"
 
-typedef struct 
+
+typedef struct Partida
 {
     Tabuleiro tabuleiro;
 
