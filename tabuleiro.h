@@ -4,7 +4,7 @@
 typedef struct 
 {
     int M[3][3];
-} Tabuleiro;
+} Tabuleiro; 
 
 void inicializaTabuleiro(Tabuleiro *t);
 
