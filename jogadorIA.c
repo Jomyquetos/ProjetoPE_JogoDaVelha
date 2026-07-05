@@ -22,7 +22,7 @@ void jogaIA(Partida *p, Tabuleiro *t)
 
 int r1EvitaDerrota(Partida *p, Tabuleiro *t){
     int i, j, soma, rival, tipo;
-    rival= p->jogador2.tipo *2;
+    rival= p->jogador1.tipo *2;
     tipo= p->jogadorIA.tipo *2;
 
 
@@ -184,7 +184,7 @@ int r3CentroLivre(Partida *p, Tabuleiro *t){
 
 int r4CantoOposto(Partida *p, Tabuleiro *t){
     int rival, tipo;
-    rival= p->jogador2.tipo;
+    rival= p->jogador1.tipo;
     tipo= p->jogadorIA.tipo;
 
     if (t->M[0][0]==rival){

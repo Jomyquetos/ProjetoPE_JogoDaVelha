@@ -10,9 +10,9 @@ typedef struct Partida
 {
     Tabuleiro tabuleiro;
 
-    JogadorIA jogadorIA;
+    JogadorTeclado jogador1;
 
-    JogadorTeclado jogador2;
+    JogadorIA jogadorIA;
 } Partida;
 
 void configuraJogadores(Partida *p);
