@@ -5,7 +5,7 @@
 void configuraJogadores(Partida *p)
 {
     char aux;
-    printf("Jogador, escolha seu símbolo (O ou X): ");
+    printf("Jogador, escolha seu simbolo (O ou X): ");
     scanf(" %c", &aux);
 
     if(aux == 'O' || aux == 'o'){
