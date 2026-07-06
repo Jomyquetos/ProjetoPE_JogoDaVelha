@@ -1,9 +1,11 @@
 #include "jogadorRemoto.h"
 
-#include <stdio.h>
-#include <stdlib.h>
+#define _WIN32_WINNT 0x0600
 #include <winsock2.h>
 #include <ws2tcpip.h>
+
+#include <stdio.h>
+#include <stdlib.h>
 
 #pragma comment(lib, "ws2_32.lib")
 
@@ -36,17 +38,17 @@ void conecta(char *ip, int porta)
     endereco.sin_family = AF_INET;
     endereco.sin_port = htons(porta);
 
-    if (inet_pton(AF_INET, ip, &endereco.sin_addr) <= 0)
+    if (endereco.sin_addr.s_addr = inet_addr(ip))
     {
         perror("Endereco invalido");
-        close(socket_fd);
+        closesocket(socket_fd);
         exit(EXIT_FAILURE);
     }
 
     if (connect(socket_fd, (struct sockaddr *)&endereco, sizeof(endereco)) < 0)
     {
         perror("Erro ao conectar");
-        close(socket_fd);
+        closesocket(socket_fd);
         exit(EXIT_FAILURE);
     }
 
@@ -73,14 +75,14 @@ void aceitaConexao(int porta)
     if (bind(servidor_fd, (struct sockaddr *)&endereco, sizeof(endereco)) < 0)
     {
         perror("Erro no bind");
-        close(servidor_fd);
+        closesocket(servidor_fd);
         exit(EXIT_FAILURE);
     }
 
     if (listen(servidor_fd, 1) < 0)
     {
         perror("Erro no listen");
-        close(servidor_fd);
+        closesocket(servidor_fd);
         exit(EXIT_FAILURE);
     }
 
@@ -91,7 +93,7 @@ void aceitaConexao(int porta)
     if (socket_fd < 0)
     {
         perror("Erro no accept");
-        close(servidor_fd);
+        closesocket(servidor_fd);
         exit(EXIT_FAILURE);
     }
 

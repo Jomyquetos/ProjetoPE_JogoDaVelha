@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "jogadorTeclado.h"
+#include "tabuleiro.h"
 
 void joga(JogadorTeclado *j, Tabuleiro *t)
 {
