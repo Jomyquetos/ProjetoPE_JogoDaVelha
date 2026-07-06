@@ -29,7 +29,7 @@ int r1EvitaDerrota(Partida *p, Tabuleiro *t){
     for (i = 0; i < 3; i++)
     {
         soma = t->M[i][0] + t->M[i][1] + t->M[i][2];
-        if (soma == rival || soma == tipo){
+        if (soma == rival){
             if (t->M[i][0]==0){
                 marcaJogada(t, i, 0, p->jogadorIA.tipo);
                 return 1;
@@ -45,7 +45,7 @@ int r1EvitaDerrota(Partida *p, Tabuleiro *t){
         }
 
         soma = t->M[0][i] + t->M[1][i] + t->M[2][i];
-        if (soma == rival || soma == tipo){
+        if (soma == rival){
             if (t->M[0][i]==0){
                 marcaJogada(t, 0, i, p->jogadorIA.tipo);
                 return 1;
@@ -62,7 +62,7 @@ int r1EvitaDerrota(Partida *p, Tabuleiro *t){
     }
 
     soma = t->M[0][0] + t->M[1][1] + t->M[2][2];
-    if (soma == rival || soma == tipo){
+    if (soma == rival){
         if (t->M[0][0]==0){
             marcaJogada(t, 0, 0, p->jogadorIA.tipo);
             return 1;
@@ -78,7 +78,7 @@ int r1EvitaDerrota(Partida *p, Tabuleiro *t){
     }    
 
     soma = t->M[0][2] + t->M[1][1] + t->M[2][0];
-    if (soma == rival || soma == tipo){
+    if (soma == rival){
         if (t->M[0][2]==0){
             marcaJogada(t, 0, 2, p->jogadorIA.tipo);
             return 1;
@@ -98,78 +98,41 @@ int r1EvitaDerrota(Partida *p, Tabuleiro *t){
 
 
 int r2CriaDuasSequencias(Partida *p, Tabuleiro *t){
-    int i, j, soma, tipo;
-    tipo= p->jogadorIA.tipo;
-
-
-    soma = t->M[0][0] + t->M[1][1] + t->M[2][2];
-    if (soma == tipo){
-        if (t->M[0][0]==0){
-            marcaJogada(t, 0, 0, p->jogadorIA.tipo);
-            return 1;
-        }
-        if (t->M[1][1]==0){
-            marcaJogada(t, 1, 1, p->jogadorIA.tipo);
-            return 1;
-        }
-        if (t->M[2][2]==0){
-            marcaJogada(t, 2, 2, p->jogadorIA.tipo);
-            return 1;
-        }
-    } 
-    soma = t->M[0][2] + t->M[1][1] + t->M[2][0];
-    if (soma == tipo){
-        if (t->M[0][2]==0){
-            marcaJogada(t, 0, 2, tipo);
-            return 1;
-        }
-        if (t->M[1][1]==0){
-            marcaJogada(t, 1, 1, tipo);
-            return 1;
-        }
-        if (t->M[2][0]==0){
-            marcaJogada(t, 2, 0, tipo);
-            return 1;
-        }
-    }
+    int i, j, soma;
+    int tipo= p->jogadorIA.tipo;
+    int alvo = tipo *2;
 
     for (i = 0; i < 3; i++)
     {
-        soma = t->M[i][0] + t->M[i][1] + t->M[i][2];
-        if (soma == tipo){
-            if (t->M[i][0]==0){
-                marcaJogada(t, i, 0, tipo);
-                return 1;
-            }
-            if (t->M[i][1]==0){
-                marcaJogada(t, i, 1, tipo);
-                return 1;
-            }
-            if (t->M[i][2]==0){
-                marcaJogada(t, i, 2, tipo);
-                return 1;
-            }
-        }
+        for (j = 0; j < 3; j++)
+        {
+            if (t->M[i][j]==0){
 
-        soma = t->M[0][i] + t->M[1][i] + t->M[2][i];
-        if (soma == tipo){
-            if (t->M[0][i]==0){
-                marcaJogada(t, 0, i, p->jogadorIA.tipo);
-                return 1;
-            }
-            if (t->M[1][i]==0){
-                marcaJogada(t, 1, i, p->jogadorIA.tipo);
-                return 1;
-            }
-            if(t->M[2][i]==0){
-                marcaJogada(t, 2, i, p->jogadorIA.tipo);
-                return 1;
-            }
+                t->M[i][j]= tipo;
+
+                int somaDiagonal= t->M[0][0] + t->M[1][1] + t->M[2][2];
+                int somaDiagonalS= t->M[0][2] + t->M[1][1] + t->M[2][0];
+                int somaLinha = t->M[i][0] + t->M[i][1] + t->M[i][2];
+                int somaColuna = t->M[0][j] + t->M[1][j] + t->M[2][j];
+
+
+                if ((somaDiagonal == alvo && somaDiagonalS == alvo) ||
+                    (somaDiagonal == alvo && somaLinha == alvo)     ||
+                    (somaDiagonal == alvo && somaColuna == alvo)    ||
+                    (somaDiagonalS == alvo && somaLinha == alvo)    ||
+                    (somaDiagonalS == alvo && somaColuna == alvo)   ||
+                    (somaLinha == alvo && somaColuna == alvo)){
+
+                    marcaJogada(t, i, j, tipo);
+                    return 1;
+                }
+
+                t->M[i][j] = 0; 
+           }
         }
     }
     return 0;
-
-}
+}  
 
 int r3CentroLivre(Partida *p, Tabuleiro *t){
     int tipo= p->jogadorIA.tipo;
