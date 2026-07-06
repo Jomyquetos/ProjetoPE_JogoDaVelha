@@ -1,19 +1,24 @@
 #include <stdio.h>
 #include "partida.h"
 
+#define LOCAL 0
+#define REMOTO 1
+
 void configuraJogadores(Partida *p)
 {
-    char aux;
-    printf("Jogador 1, escolha seu símbolo (O ou X): ");
-    scanf(" %c", &aux);
+    p->jogador1.tipo = 1; // O
+    p->jogador2.tipo = 4; // X: jogador remoto
+}
 
-    if(aux == 'O' || aux == 'o'){
-        p->jogador1.tipo = 1; // O
-        p->jogador2.tipo = 4; // X
+void acharJogada(Partida *p, int vez)
+{
+    if (vez == LOCAL)
+    {
+        joga(&p->jogador1, &p->tabuleiro);
     }
-    else{
-        p->jogador1.tipo = 4; // X
-        p->jogador2.tipo = 1; // O
+    else
+    {
+        jogaRemoto(&p->jogador2, &p->tabuleiro);
     }
 }
 
@@ -28,10 +33,8 @@ void inicia(Partida *p)
     {
         desenha(&p->tabuleiro);
 
-        joga(&p->jogador1, &p->tabuleiro);
-
+        acharJogada(p, REMOTO);
         jogadas++;
-
         vencedor = temVencedor(&p->tabuleiro);
 
         if (vencedor != 0 || jogadas == 9)
@@ -39,10 +42,8 @@ void inicia(Partida *p)
 
         desenha(&p->tabuleiro);
 
-        joga(&p->jogador2, &p->tabuleiro);
-
+        acharJogada(p, LOCAL);
         jogadas++;
-
         vencedor = temVencedor(&p->tabuleiro);
     }
 
@@ -50,10 +51,8 @@ void inicia(Partida *p)
 
     if (vencedor == 1)
         printf("Jogador O venceu!\n");
-
     else if (vencedor == 4)
         printf("Jogador X venceu!\n");
-
     else
         printf("Empate!\n");
 }
