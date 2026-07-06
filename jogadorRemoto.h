@@ -1,16 +1,19 @@
 #ifndef JOGADOR_REMOTO_H
 #define JOGADOR_REMOTO_H
 
-typedef struct Tabuleiro Tabuleiro
+#include "tabuleiro.h"
 
-    typedef struct
+typedef struct
 {
-    int tipo;
+    int socket_fd;
 } JogadorRemoto;
 
 void conecta(char *ip, int porta);
-void jogaRemota(struct JogadorRemoto *jr, Tabuleiro *t);
+
+void jogaRemoto(JogadorRemoto *jr, Tabuleiro *t);
+
 void aceitaConexao(int porta);
+
 void enviaJogada(int linha, int coluna);
 
 #endif

@@ -2,13 +2,26 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <arpa/inet.h>
+#include <winsock2.h>
+#include <ws2tcpip.h>
+
+#pragma comment(lib, "ws2_32.lib")
 
 int socket_fd;
 
 struct sockaddr_in endereco;
+
+void iniciaRede()
+{
+    WSADATA wsaData;
+    int iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
+
+    if (iResult != 0)
+    {
+        printf("Falha ao inicializar Winsock: %d\n", iResult);
+        exit(EXIT_FAILURE);
+    }
+}
 
 void conecta(char *ip, int porta)
 {
@@ -84,13 +97,13 @@ void aceitaConexao(int porta)
 
     printf("Cliente conectado!\n");
 
-    close(servidor_fd);
+    closesocket(servidor_fd);
 }
 
 void enviaJogada(int linha, int coluna)
 {
-    write(socket_fd, &linha, sizeof(int));
-    write(socket_fd, &coluna, sizeof(int));
+    send(socket_fd, &linha, sizeof(int), 0);
+    send(socket_fd, &coluna, sizeof(int), 0);
 }
 
 void jogaRemoto(JogadorRemoto *jr, Tabuleiro *t)
@@ -98,17 +111,22 @@ void jogaRemoto(JogadorRemoto *jr, Tabuleiro *t)
     int linha;
     int coluna;
 
-    if (read(socket_fd, &linha, sizeof(int))
+    if (recv(socket_fd, &linha, sizeof(int), 0) <= 0)
     {
         printf("Erro ao receber linha.\n");
         return;
     }
 
-    if (read(socket_fd, &coluna, sizeof(int))
+    if (recv(socket_fd, &coluna, sizeof(int), 0) <= 0)
     {
         printf("Erro ao receber coluna.\n");
         return;
     }
 
     marcaJogada(t, linha, coluna, jr->tipo);
+}
+
+void finalizaRede()
+{
+    WSACleanup();
 }

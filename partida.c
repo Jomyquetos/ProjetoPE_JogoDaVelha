@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "partida.h"
+#include "jogadorRemoto.h"
 
 #define LOCAL 0
 #define REMOTO 1
