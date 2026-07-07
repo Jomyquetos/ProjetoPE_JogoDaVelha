@@ -1,19 +1,20 @@
 #include <stdio.h>
 #include "partida.h"
 
+
 void configuraJogadores(Partida *p)
 {
     char aux;
-    printf("Jogador 1, escolha seu símbolo (O ou X): ");
+    printf("Jogador, escolha seu simbolo (O ou X): ");
     scanf(" %c", &aux);
 
     if(aux == 'O' || aux == 'o'){
         p->jogador1.tipo = 1; // O
-        p->jogador2.tipo = 4; // X
+        p->jogadorIA.tipo = 4; // X
     }
     else{
         p->jogador1.tipo = 4; // X
-        p->jogador2.tipo = 1; // O
+        p->jogadorIA.tipo = 1; // O
     }
 }
 
@@ -39,7 +40,7 @@ void inicia(Partida *p)
 
         desenha(&p->tabuleiro);
 
-        joga(&p->jogador2, &p->tabuleiro);
+        jogaIA(p, &p->tabuleiro);
 
         jogadas++;
 

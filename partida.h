@@ -3,14 +3,16 @@
 
 #include "tabuleiro.h"
 #include "jogadorTeclado.h"
+#include "jogadorIA.h"
 
-typedef struct 
+
+typedef struct Partida
 {
     Tabuleiro tabuleiro;
 
     JogadorTeclado jogador1;
 
-    JogadorTeclado jogador2;
+    JogadorIA jogadorIA;
 } Partida;
 
 void configuraJogadores(Partida *p);
