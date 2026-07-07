@@ -29,7 +29,7 @@ int r1EvitaDerrota(Partida *p, Tabuleiro *t){
     for (i = 0; i < 3; i++)
     {
         soma = t->M[i][0] + t->M[i][1] + t->M[i][2];
-        if (soma == rival){
+        if (soma == rival || soma == tipo){
             if (t->M[i][0]==0){
                 marcaJogada(t, i, 0, p->jogadorIA.tipo);
                 return 1;
@@ -62,7 +62,7 @@ int r1EvitaDerrota(Partida *p, Tabuleiro *t){
     }
 
     soma = t->M[0][0] + t->M[1][1] + t->M[2][2];
-    if (soma == rival){
+    if (soma == rival || soma == tipo){
         if (t->M[0][0]==0){
             marcaJogada(t, 0, 0, p->jogadorIA.tipo);
             return 1;
@@ -78,7 +78,7 @@ int r1EvitaDerrota(Partida *p, Tabuleiro *t){
     }    
 
     soma = t->M[0][2] + t->M[1][1] + t->M[2][0];
-    if (soma == rival){
+    if (soma == rival || soma == tipo){
         if (t->M[0][2]==0){
             marcaJogada(t, 0, 2, p->jogadorIA.tipo);
             return 1;
